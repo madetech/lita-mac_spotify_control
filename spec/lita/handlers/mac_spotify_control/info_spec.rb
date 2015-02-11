@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Lita::Handlers::MacSpotifyControl::Info, lita_handler: true do
   context 'info/whats playing/shazzam' do
     it { is_expected.to route_command('info').to(:info) }
-    it { is_expected.to route_command('whats playing').to(:info) }
-    it { is_expected.to route_command('shazzam').to(:info) }
+    it { is_expected.to route('whats playing').to(:info) }
+    it { is_expected.to route('shazzam').to(:info) }
   end
 
   context 'search/look for/find me' do

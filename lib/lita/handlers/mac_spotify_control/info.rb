@@ -2,10 +2,14 @@ module Lita::Handlers::MacSpotifyControl
   class Info < Lita::Handler
     namespace "mac_spotify_control"
 
-    route(%r{^(?:info|whats playing|what is playing|shazzam)$},
+    route(%r{^(?:info)$},
            :info,
            command: true,
            help: { 'info|whats playing|what is playing|shazzam' => 'Info about the current track'})
+
+    route(%r{^(?:info|whats playing|what is playing|shazzam)$},
+           :info,
+           command: false)
 
     route(%r{^(?:search|look for|find me) (.+)$},
            :search,
