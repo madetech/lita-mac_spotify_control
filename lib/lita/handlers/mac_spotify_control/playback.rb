@@ -1,8 +1,8 @@
 module Lita::Handlers::MacSpotifyControl
-  class Play < Lita::Handler
+  class Playback < Lita::Handler
     namespace "mac_spotify_control"
 
-    route(%r{^(play|start)$},
+    route(%r{^(?:play|start)$},
            :play,
            command: true,
            help: { 'play' => 'Plays spotify',
@@ -18,6 +18,20 @@ module Lita::Handlers::MacSpotifyControl
           command: true,
           help: { 'play QUERY' => 'Plays the result of supplied QUERY' })
 
+    route(%r{^repeat$},
+          :toggle_repeat,
+          command: true,
+          help: { 'repeat' => 'Toggle repeat on/off' })
+
+    route(%r{^shuffle$},
+          :toggle_shuffle,
+          command: true,
+          help: { 'shuffle' => 'Toggle shuffling on/off' })
+
+    route(%r{^volume (up|down|\d{2})$},
+          :volume,
+          command: true,
+          help: { 'shuffle' => 'Toggle shuffling on/off' })
 
     def play(response)
       # noop
@@ -30,7 +44,19 @@ module Lita::Handlers::MacSpotifyControl
     def play_search_result(response)
       # noop
     end
+
+    def toggle_repeat(response)
+      # noop
+    end
+
+    def toggle_shuffle(response)
+      # noop
+    end
+
+    def volume(response)
+      # noop
+    end
   end
 end
 
-Lita.register_handler(Lita::Handlers::MacSpotifyControl::Play)
+Lita.register_handler(Lita::Handlers::MacSpotifyControl::Playback)
