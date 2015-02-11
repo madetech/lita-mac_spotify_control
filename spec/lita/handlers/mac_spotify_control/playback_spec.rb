@@ -17,6 +17,7 @@ describe Lita::Handlers::MacSpotifyControl::Playback, lita_handler: true do
   end
 
   context 'volume' do
+    it { is_expected.to route_command("volume").to(:volume) }
     it { is_expected.to route_command("volume up").to(:volume) }
     it { is_expected.to route_command("volume down").to(:volume) }
     it { is_expected.to route_command("volume 11").to(:volume) }

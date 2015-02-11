@@ -28,10 +28,15 @@ module Lita::Handlers::MacSpotifyControl
           command: true,
           help: { 'shuffle' => 'Toggle shuffling on/off' })
 
+    route(%r{^volume$},
+          :volume,
+          command: true,
+          help: { 'volume' => 'Current volume' })
+
     route(%r{^volume (up|down|\d{2})$},
           :volume,
           command: true,
-          help: { 'shuffle' => 'Toggle shuffling on/off' })
+          help: { 'volume up|down|1-11' => 'Change volume' })
 
     def play(response)
       # noop
