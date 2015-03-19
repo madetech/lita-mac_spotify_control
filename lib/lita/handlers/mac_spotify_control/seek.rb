@@ -13,11 +13,22 @@ module Lita::Handlers::MacSpotifyControl
            help: { 'previous/prev' => 'Play previous track'})
 
     def next(response)
-      # noop
+      spotify_request = Spotify::Control.next_track
+
+      if spotify_request.stderr != ''
+        response.reply(spotify_request.stderr)
+      else
+        response.reply(spotify_request.stdout)
+      end
     end
 
     def previous(response)
-      # noop
+      spotify_request = Spotify::Control.previous_track
+      if spotify_request.stderr != ''
+        response.reply(spotify_request.stderr)
+      else
+        response.reply(spotify_request.stdout)
+      end
     end
   end
 end

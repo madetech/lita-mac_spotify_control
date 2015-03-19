@@ -6,8 +6,8 @@ def osascript(script)
                                           *script.split(/\n/).map { |line| ['-e', line] }.flatten)
 
   OpenStruct.new(
-    stdout: stdout,
-    stderr: stderr,
+    stdout: stdout.chomp,
+    stderr: stderr.chomp,
     status: status
   )
 end

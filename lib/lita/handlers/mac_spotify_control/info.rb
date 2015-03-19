@@ -2,26 +2,23 @@ module Lita::Handlers::MacSpotifyControl
   class Info < Lita::Handler
     namespace "mac_spotify_control"
 
-    route(%r{^(?:info)$},
+    route(%r{^(?:track info|current track)$},
            :info,
            command: true,
-           help: { 'info|whats playing|what is playing|shazzam' => 'Info about the current track'})
+           help: { 'track info|current track' => 'Info about the current track'})
 
-    route(%r{^(?:info|whats playing|what is playing|shazzam)$},
+    route(%r{^(?:whats playing|what is playing|shazzam)$},
            :info,
            command: false)
 
-    route(%r{^(?:search|look for|find me) (.+)$},
-           :search,
-           command: true,
-           help: { 'search|look for|find me QUERY' => 'Search for QUERY'})
-
-    def search(response)
-      # noop
-    end
-
     def info(response)
-      # noop
+      spotify_request = Spotify::Control.info
+
+      if spotify_request.stderr != ''
+        response.reply(spotify_request.stderr)
+      else
+        response.reply(spotify_request.stdout)
+      end
     end
   end
 end
