@@ -5,12 +5,12 @@ module Lita::Handlers::MacSpotifyControl
     route(%r{^next$},
            :next,
            command: true,
-           help: { 'next' => 'Play next track'})
+           help: { 'next' => 'Play next track' })
 
     route(%r{^(?:previous|prev)$},
            :previous,
            command: true,
-           help: { 'previous/prev' => 'Play previous track'})
+           help: { 'previous/prev' => 'Play previous track' })
 
     def next(response)
       spotify_request = Spotify::Control.next_track
