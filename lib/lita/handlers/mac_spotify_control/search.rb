@@ -1,9 +1,18 @@
+require 'rspotify'
+
 module Lita::Handlers::MacSpotifyControl
   class Search < Lita::Handler
     namespace 'mac_spotify_control'
 
     config :client_id
     config :client_secret
+
+    on :loaded, :authorise_rspotify
+
+    def authorise_rspotify(payload)
+      return if config.client_id == nil or config.client_secret == nil
+      RSpotify::authenticate(config.client_id, config.client_secret)
+    end
 
     route(%r{^play (artist|album|track|playlist) (.+)$},
           :play_search_result,
