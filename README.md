@@ -1,5 +1,7 @@
 # lita-mac_spotify_control
 
+[![Build Status](https://travis-ci.org/madebymade/lita-mac_spotify_control.svg?branch=master)](https://travis-ci.org/madebymade/lita-mac_spotify_control)
+
 In the [Made](http://www.madetech.co.uk?ref=github&repo=lita-mac_spotify_control) office we have an iMac acting as a Spotify jukebox, which until now was controlled by Hubot. However we prodominantly code using Ruby so a switch to Lita was a logical switch.
 
 ## Installation
