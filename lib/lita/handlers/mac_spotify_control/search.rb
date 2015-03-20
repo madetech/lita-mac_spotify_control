@@ -1,6 +1,6 @@
 module Lita::Handlers::MacSpotifyControl
   class Search < Lita::Handler
-    namespace "mac_spotify_control"
+    namespace 'mac_spotify_control'
 
     config :client_id
     config :client_secret

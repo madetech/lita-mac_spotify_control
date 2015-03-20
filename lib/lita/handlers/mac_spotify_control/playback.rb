@@ -1,6 +1,6 @@
 module Lita::Handlers::MacSpotifyControl
   class Playback < Lita::Handler
-    namespace "mac_spotify_control"
+    namespace 'mac_spotify_control'
 
     route(%r{^(?:play)$},
            :play,
@@ -58,7 +58,7 @@ module Lita::Handlers::MacSpotifyControl
       if spotify_request.stderr != ''
         response.reply(spotify_request.stderr)
       else
-        repeat_on = !(spotify_request.stdout == "true")
+        repeat_on = !(spotify_request.stdout == 'true')
         response.reply("I've turned repeat #{ if repeat_on then 'on' else 'off' end}")
       end
     end

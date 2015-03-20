@@ -1,6 +1,6 @@
 module Lita::Handlers::MacSpotifyControl
   class Seek < Lita::Handler
-    namespace "mac_spotify_control"
+    namespace 'mac_spotify_control'
 
     route(%r{^next$},
            :next,
