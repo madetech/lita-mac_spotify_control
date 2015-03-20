@@ -4,13 +4,17 @@ In the [Made](http://www.madetech.co.uk?ref=github&repo=lita-mac_spotify_control
 
 ## Installation
 
-Your Lita instance **must** be on the same machine as an active Spotify session. I.e the app is open.
+Your Lita instance **must** be on the same machine as an active Spotify session. i.e the app is open.
 
 Add `lita-mac_spotify_control` to your Lita instance's Gemfile:
 
 ``` ruby
 gem "lita-mac_spotify_control"
 ```
+
+To make full use of the the handlers functionality you will need to register an [Application with Spotify](https://developer.spotify.com/my-applications) this allows RSpotify to search playlists and get track details.
+
+At time of writing (20/04/2015) their is a known bug in Spotify's Applescript implementation. There is [a way around this](https://community.spotify.com/t5/Help-Desktop-Linux-Mac-and/Apple-scripting-broken-in-1-0-1-988-g8f17a348/td-p/1029434), but at the moment you still can't play tracks from Spotify URIs
 
 ## Configuration
 
