@@ -22,7 +22,21 @@ TODO: Describe any configuration attributes the plugin exposes.
 
 ## Usage
 
-TODO: Describe the plugin's features and how to use them.
+### Commands
+
+| Text                 | Result                                   |
+| current track        | Info about the current track             |
+| next                 | Play next track                          |
+| pause                | Pause Spotify                            |
+| play                 | Plays spotify                            |
+| play QUERY           | Plays the result of supplied QUERY       |
+| play SPOTIFY_URI     | Plays supplied Spotify URI               |
+| play SPOTIFY_URL     | Plays playlist from supplied Spotify URL |
+| previous/prev        | Play previous track                      |
+| repeat               | Toggle repeat on/off                     |
+| shuffle              | Toggle shuffling on/off                  |
+| volume               | Current volume                           |
+| volume up/down/1-10  | Set/change volume                        |
 
 ##Credits
 
