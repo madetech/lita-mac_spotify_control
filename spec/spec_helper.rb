@@ -7,6 +7,8 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
 ]
 SimpleCov.start { add_filter "/spec/" }
 
+Coveralls.wear!
+
 require "support/test_helpers"
 
 require 'capybara/rspec'
