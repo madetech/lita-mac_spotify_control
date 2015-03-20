@@ -82,4 +82,58 @@ describe Lita::Handlers::MacSpotifyControl::Search, lita_handler: true do
       end
     end
   end
+
+  context 'playing a specific spotify uri' do
+    let(:spotify_stdout) { 'Now Playing: this by that' }
+    let(:rspotify_response) do
+      double(
+        uri: 'aUri',
+        tracks: [double(uri: 'anotherUri')]
+      )
+    end
+
+    before(:each) do
+      allow(Spotify::Control).to receive(:play_in_context).and_return(spotify_response)
+      allow(Spotify::Control).to receive(:play).and_return(spotify_response)
+    end
+
+    context 'for an artist' do
+      let(:rspotify_response) do
+        double(
+          uri: 'aUri',
+          top_tracks: [double(uri: 'anotherUri')]
+        )
+      end
+
+      it 'should display now playing' do
+        allow(Spotify::Find).to receive(:artist).and_return(rspotify_response)
+        send_command('play spotify:artist:71h7GTahhKcSkQ1ayhTvOD')
+        expect(replies.last).to include('Now Playing')
+      end
+    end
+
+    context 'for an album' do
+      it 'should display now playing' do
+        allow(Spotify::Find).to receive(:album).and_return(rspotify_response)
+        send_command('play spotify:album:5gsEd84TFIgM6R4WIOWnua')
+        expect(replies.last).to include('Now Playing')
+      end
+    end
+
+    context 'for a playlist [Seb] Punk Rock 101' do
+      it 'should display now playing' do
+        allow(Spotify::Find).to receive(:playlist).and_return(rspotify_response)
+        send_command('play spotify:user:s-n-e-ashton:playlist:7gkEpOdR1znO8cCkTLZySc')
+        expect(replies.last).to include('Now Playing')
+      end
+    end
+
+    context 'for a track Danger Zone' do
+      it 'should display now playing' do
+        allow(Spotify::Find).to receive(:track).and_return(rspotify_response)
+        send_command('play spotify:track:3yjcigjXEcf2JkZKzPPFne')
+        expect(replies.last).to include('Now Playing')
+      end
+    end
+  end
 end

@@ -2,6 +2,9 @@ module Lita::Handlers::MacSpotifyControl
   class Search < Lita::Handler
     namespace "mac_spotify_control"
 
+    config :client_id
+    config :client_secret
+
     route(%r{^play (artist|album|track|playlist) (.+)$},
           :play_search_result,
           command: true,
@@ -38,8 +41,7 @@ module Lita::Handlers::MacSpotifyControl
       case type
       when :track
         play_track(response, "spotify\:track\:#{spotify_id}")
-      when :album
-      when :artist
+      when :album, :artist
         context = "spotify\:#{type}\:#{spotify_id}"
         play_track_in_context(response, context, find_first_track(type, spotify_id).uri)
       end
@@ -72,9 +74,7 @@ module Lita::Handlers::MacSpotifyControl
       case type
       when :artist
         play_track_in_context(response, context, result[0].top_tracks(:GB).first.uri)
-      when :album
-        play_track_in_context(response, context, result[0].tracks.first.uri)
-      when :playlist
+      when :album, :playlist
         play_track_in_context(response, context, result[0].tracks.first.uri)
       when :track
         play_track(response, context)
@@ -83,8 +83,8 @@ module Lita::Handlers::MacSpotifyControl
 
     private
 
-    def find_first_track(spotify_id, type)
-      result = Spotify::Find.new.send(type, spotify_id)
+    def find_first_track(type, spotify_id)
+      result = Spotify::Find.send(type, spotify_id)
 
       if type == :artist
         result.top_tracks(:GB).first
