@@ -2,9 +2,9 @@ language: ruby
 rvm:
   - 2.0.0
 script: bundle exec rake
+before_script:
+  - export CODECLIMATE_REPO_TOKEN=5d1ff7a1327f42d880f5e3836dd06914feec2261fab8f3090ff94d2ec692ea37
 before_install:
   - gem update --system
 services:
   - redis-server
-addons:
-  code_climate: 5d1ff7a1327f42d880f5e3836dd06914feec2261fab8f3090ff94d2ec692ea37
