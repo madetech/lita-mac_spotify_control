@@ -6,3 +6,5 @@ before_install:
   - gem update --system
 services:
   - redis-server
+addons:
+  code_climate: 5d1ff7a1327f42d880f5e3836dd06914feec2261fab8f3090ff94d2ec692ea37
