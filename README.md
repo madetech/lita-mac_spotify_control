@@ -25,6 +25,7 @@ TODO: Describe any configuration attributes the plugin exposes.
 ### Commands
 
 | Text                 | Result                                   |
+| -------------------- | ---------------------------------------- |
 | current track        | Info about the current track             |
 | next                 | Play next track                          |
 | pause                | Pause Spotify                            |
