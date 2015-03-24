@@ -46,7 +46,7 @@ TODO: Describe any configuration attributes the plugin exposes.
 
 Developed and maintained by [Made](http://www.madetech.co.uk?ref=github&repo=lita-mac_spotify_control).
 
-[![made](https://s3-eu-west-1.amazonaws.com/made-assets/googleapps/google-apps.png)](http://www.madetech.co.uk?ref=github&repo=navobile)
+[![made](https://s3-eu-west-1.amazonaws.com/made-assets/googleapps/google-apps.png)](http://www.madetech.co.uk?ref=github&repo=lita-mac_spotify_control)
 
 The Calling of AppleScript from inside ruby was gained from using [this snippet](http://porkrind.org/missives/calling-applescript-from-ruby/)
 
