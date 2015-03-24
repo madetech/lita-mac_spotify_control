@@ -53,19 +53,13 @@ module Lita::Handlers::MacSpotifyControl
     def toggle_repeat(response)
       spotify_request = Spotify::Control.toggle_repeat
 
-      if can_reply?(spotify_request)
-        repeat_on = !(spotify_request.stdout == 'true')
-        response.reply("I've turned repeat #{ if repeat_on then 'on' else 'off' end}")
-      end
+      toggle_function(response, spotify_request, 'repeat')
     end
 
     def toggle_shuffle(response)
       spotify_request = Spotify::Control.toggle_shuffle
 
-      if can_reply?(spotify_request)
-        shuffle_on = !(spotify_request.stdout == 'true')
-        response.reply("I've turned shuffle #{ if shuffle_on then 'on' else 'off' end}")
-      end
+      toggle_function(response, spotify_request, 'shuffle')
     end
 
     def volume(response)
@@ -84,6 +78,13 @@ module Lita::Handlers::MacSpotifyControl
     end
 
     private
+
+    def toggle_function(response, spotify_request, type)
+      if can_reply?(spotify_request)
+        is_on = !(spotify_request.stdout == 'true')
+        response.reply("I've turned #{type} #{ if is_on then 'on' else 'off' end}")
+      end
+    end
 
     def set_volume(match)
       spotify_request = Spotify::Control.current_volume
