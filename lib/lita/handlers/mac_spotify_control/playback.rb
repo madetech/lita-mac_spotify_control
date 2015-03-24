@@ -1,5 +1,9 @@
+require 'lita/handlers/mac_spotify_control/respond'
+
 module Lita::Handlers::MacSpotifyControl
   class Playback < Lita::Handler
+    include LitaMacSpotifyControl::Respond
+
     namespace 'mac_spotify_control'
 
     route(%r{^(?:play)$},
@@ -35,29 +39,21 @@ module Lita::Handlers::MacSpotifyControl
     def play(response)
       spotify_request = Spotify::Control.play
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
 
     def pause(response)
       spotify_request = Spotify::Control.pause
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply("Spotify is now #{Spotify::Control.state.stdout}")
-      end
+      reply_text = "Spotify is now #{Spotify::Control.state.stdout}"
+
+      respond_to_user(response, spotify_request, reply_text)
     end
 
     def toggle_repeat(response)
       spotify_request = Spotify::Control.toggle_repeat
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
+      if can_reply?(spotify_request)
         repeat_on = !(spotify_request.stdout == 'true')
         response.reply("I've turned repeat #{ if repeat_on then 'on' else 'off' end}")
       end
@@ -66,9 +62,7 @@ module Lita::Handlers::MacSpotifyControl
     def toggle_shuffle(response)
       spotify_request = Spotify::Control.toggle_shuffle
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
+      if can_reply?(spotify_request)
         shuffle_on = !(spotify_request.stdout == 'true')
         response.reply("I've turned shuffle #{ if shuffle_on then 'on' else 'off' end}")
       end
@@ -77,12 +71,10 @@ module Lita::Handlers::MacSpotifyControl
     def volume(response)
       spotify_request = Spotify::Control.current_volume
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        lita_reply = spotify_request.stdout.to_i.round(-1)
-        response.reply("Current volume is #{lita_reply/10}")
-      end
+      reply_volume = spotify_request.stdout.to_i.round(-1)
+      reply_text = "Current volume is #{reply_volume/10}"
+
+      respond_to_user(response, spotify_request, reply_text)
     end
 
     def control_volume(response)
@@ -96,9 +88,7 @@ module Lita::Handlers::MacSpotifyControl
     def set_volume(match)
       spotify_request = Spotify::Control.current_volume
 
-      if spotify_request.stderr != ''
-        return spotify_request.stderr
-      end
+      return spotify_request.stderr unless can_reply?(spotify_request)
 
       current_volume = spotify_request.stdout.to_i.round(-1)
 

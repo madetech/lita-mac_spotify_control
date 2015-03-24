@@ -1,8 +1,11 @@
 require 'rspotify'
+require 'lita/handlers/mac_spotify_control/respond'
 
 module Lita::Handlers::MacSpotifyControl
   class Search < Lita::Handler
     namespace 'mac_spotify_control'
+
+    include LitaMacSpotifyControl::Respond
 
     config :client_id
     config :client_secret
@@ -66,11 +69,7 @@ module Lita::Handlers::MacSpotifyControl
         playlist.tracks.first.uri,
         playlist.uri)
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
 
     def play_search_result(response)
@@ -105,21 +104,13 @@ module Lita::Handlers::MacSpotifyControl
     def play_track(response, spotify_uri)
       spotify_request = Spotify::Control.play(spotify_uri)
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
 
     def play_track_in_context(response, context_uri, track_uri)
       spotify_request = Spotify::Control.play_in_context(track_uri, context_uri)
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
   end
 end

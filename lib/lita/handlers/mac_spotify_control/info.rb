@@ -1,6 +1,10 @@
+require 'lita/handlers/mac_spotify_control/respond'
+
 module Lita::Handlers::MacSpotifyControl
   class Info < Lita::Handler
     namespace "mac_spotify_control"
+
+    include LitaMacSpotifyControl::Respond
 
     route(%r{^(?:track info|current track)$},
            :info,
@@ -14,11 +18,7 @@ module Lita::Handlers::MacSpotifyControl
     def info(response)
       spotify_request = Spotify::Control.info
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
   end
 end

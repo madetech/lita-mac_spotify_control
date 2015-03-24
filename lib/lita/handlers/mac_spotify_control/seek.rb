@@ -1,6 +1,10 @@
+require 'lita/handlers/mac_spotify_control/respond'
+
 module Lita::Handlers::MacSpotifyControl
   class Seek < Lita::Handler
     namespace 'mac_spotify_control'
+
+    include LitaMacSpotifyControl::Respond
 
     route(%r{^next$},
            :next,
@@ -15,20 +19,13 @@ module Lita::Handlers::MacSpotifyControl
     def next(response)
       spotify_request = Spotify::Control.next_track
 
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
 
     def previous(response)
       spotify_request = Spotify::Control.previous_track
-      if spotify_request.stderr != ''
-        response.reply(spotify_request.stderr)
-      else
-        response.reply(spotify_request.stdout)
-      end
+
+      respond_to_user(response, spotify_request, spotify_request.stdout)
     end
   end
 end
