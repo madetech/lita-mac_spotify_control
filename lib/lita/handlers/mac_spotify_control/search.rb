@@ -97,7 +97,7 @@ module Lita::Handlers::MacSpotifyControl
       if type == :artist
         result.top_tracks(:GB).first
       else
-        result.tracks(:GB).first
+        result.tracks.first
       end
     end
 
