@@ -4,7 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/madebymade/lita-mac_spotify_control/badges/gpa.svg)](https://codeclimate.com/github/madebymade/lita-mac_spotify_control)
 [![Test Coverage](https://codeclimate.com/github/madebymade/lita-mac_spotify_control/badges/coverage.svg)](https://codeclimate.com/github/madebymade/lita-mac_spotify_control)
 
-In the [Made](http://www.madetech.co.uk?ref=github&repo=lita-mac_spotify_control) office we have an iMac acting as a Spotify jukebox, which until now was controlled by Hubot. However we prodominantly code using Ruby so a switch to Lita was a logical switch.
+In the [Made](http://www.madetech.co.uk?ref=github&repo=lita-mac_spotify_control) office we have an iMac acting as a Spotify jukebox, which until now was controlled by Hubot. However we predominantly code using Ruby so a switch to Lita was a logical switch.
 
 ## Installation
 
